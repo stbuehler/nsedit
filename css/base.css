@@ -5,21 +5,6 @@ body, html {
     background:#ffffff;
 }
 
-#wrap {
-}
-#menu {
-    width: 10%;
-    float: left;
-    border: 1px solid #DDD;
-    font-family: 'Segoe UI Semilight','Open Sans',Verdana,Arial,Helvetica,sans-serif;
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 1.3;
-}
-#ImportZone {
-    height: 0px;
-    width: 0px;
-}
 .tables {
     float: right;
     width: 89%;
@@ -48,24 +33,6 @@ input[type="submit"] {
     cursor: pointer;
     font-weight: bold;
     padding: 8px;
-}
-.label {
-    display: block;
-    margin: 0 10px 0 0;
-}
-#menu ul li {
-    list-style: none outside none;
-}
-#menu ul li a {
-    color: #000000;
-    font-weight: bold;
-    text-decoration: none;
-}
-#menu ul li a:hover {
-    text-shadow: 1px 1px 1px #D3D3D3;
-}
-#MasterZones {
-    margin: 0 0 50px;
 }
 img.list {
     cursor: pointer;
@@ -108,7 +75,7 @@ div.jtable-main-container > div.jtable-bottom-panel .jtable-page-list .jtable-pa
     color: #FFFFFF;
     margin: 1px;
     padding: 5px 9px;
-	cursor: pointer;
+    cursor: pointer;
 }
 select {
     background: none repeat scroll 0 0 #FFFFFF;
@@ -160,10 +127,55 @@ tr.jtable-data-row td.content {
     font-family: monospace;
     font-size: 16px;
 }
-.jtable-input input.name {
+.jtable-input input.name,
+.jtable-input input.domain,
+.jtable-input input.nameserver,
+.jtable-input input.masters,
+.jtable-input textarea.zone,
+.jtable-input input.content {
     width: 100%;
 }
-.jtable-input input.content {
+.jtable-input input.domain,
+.jtable-input input.nameserver {
+    min-width: 300px;
+}
+.jtable-input input.masters,
+.jtable-input input.content,
+.jtable-input textarea.zone {
     min-width: 600px;
-    width: 100%;
+}
+.jtable-dialog-form .jtable-textarea-input textarea.zone {
+    min-height: 200px;
+}
+
+.label {
+    display: block;
+    margin: 0 10px 0 0;
+}
+.menu {
+    width: 10%;
+    float: left;
+    border: 1px solid #DDD;
+    font-family: 'Segoe UI Semilight','Open Sans',Verdana,Arial,Helvetica,sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.3;
+}
+.menu ul li {
+    list-style: none outside none;
+}
+.menu ul li a {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+}
+.menu ul li a:hover {
+    text-shadow: 1px 1px 1px #D3D3D3;
+}
+.ImportZone {
+    height: 0px;
+    width: 0px;
+}
+.MasterZones {
+    margin: 0 0 50px;
 }

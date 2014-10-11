@@ -287,3 +287,21 @@ function logout() {
         _unset_cookie('NSEDIT_SESSION');
     }
 }
+
+# for export as JSON
+function get_session() {
+    global $defaults;
+
+    if (!is_logged_in()) {
+        return null;
+    }
+    return array(
+        defaults => $defaults,
+        template_names => user_template_names(),
+        is_adminuser => is_adminuser(),
+        can_add_zone => is_adminuser() || $allowzoneadd,
+        can_delete_zone => is_adminuser() || $allowzoneadd,
+        username => get_sess_user(),
+        csrf_token => CSRF_TOKEN,
+    );
+}

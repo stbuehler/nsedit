@@ -27,15 +27,16 @@ case "list":
     jtable_respond($users);
     break;
 
-case "listoptions":
+case "listnames":
     $users = get_all_users();
     $retusers = array();
     foreach ($users as $user) {
-        $retusers[] = array(
-            'DisplayText' => $user['emailaddress'],
-            'Value'       => $user['emailaddress']);
+        $retusers[] = $user['emailaddress'];
     }
-    jtable_respond($retusers, 'options');
+
+    header('Content-Type: application/json');
+    print json_encode($retusers);
+    exit(0);
     break;
 
 case "create":
@@ -64,6 +65,7 @@ case "create":
     break;
 
 case "update":
+    $userid = $_POST['id'];
     $emailaddress = isset($_POST['emailaddress']) ? $_POST['emailaddress'] : '';
     $isadmin = isset($_POST['isadmin']) ? $_POST['isadmin'] : '0';
     $password = isset($_POST['password']) ? $_POST['password'] : '';
@@ -76,7 +78,7 @@ case "update":
         jtable_respond(null, 'error', 'Cannot update not existing user');
     }
 
-    if (update_user($emailaddress, $isadmin, $password)) {
+    if (update_user($userid, $emailaddress, $isadmin, $password)) {
         $result = array('emailaddress' => $emailaddress, 'isadmin' => $isadmin);
         jtable_respond($result, 'single');
     } else {

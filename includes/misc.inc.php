@@ -88,7 +88,7 @@ function add_user($username, $isadmin = FALSE, $password = '') {
     return $ret;
 }
 
-function update_user($username, $isadmin, $password) {
+function update_user($userid, $username, $isadmin, $password) {
     if ($password && !preg_match('/\$6\$/', $password)) {
         $salt = bin2hex(openssl_random_pseudo_bytes(16));
         $password = crypt($password, '$6$'.$salt);
@@ -97,14 +97,16 @@ function update_user($username, $isadmin, $password) {
     $db = get_db();
 
     if ($password) {
-        $q = $db->prepare('UPDATE users SET isadmin = ?, password = ? WHERE emailaddress = ?');
+        $q = $db->prepare('UPDATE users SET isadmin = ?, password = ?, emailaddress = ? WHERE id = ?');
         $q->bindValue(1, (int)(bool)$isadmin, SQLITE3_INTEGER);
         $q->bindValue(2, $password, SQLITE3_TEXT);
         $q->bindValue(3, $username, SQLITE3_TEXT); 
+        $q->bindValue(4, $userid, SQLITE3_INTEGER);
     } else {
-        $q = $db->prepare('UPDATE users SET isadmin = ? WHERE emailaddress = ?');
+        $q = $db->prepare('UPDATE users SET isadmin = ?, emailaddress = ? WHERE id = ?');
         $q->bindValue(1, (int)(bool)$isadmin, SQLITE3_INTEGER);
         $q->bindValue(2, $username, SQLITE3_TEXT); 
+        $q->bindValue(3, $userid, SQLITE3_INTEGER);
     }
     $ret = $q->execute();
     $db->close();
@@ -112,10 +114,10 @@ function update_user($username, $isadmin, $password) {
     return $ret;
 }
 
-function delete_user($id) {
+function delete_user($userid) {
     $db = get_db();
     $q = $db->prepare('DELETE FROM users WHERE id = ?');
-    $q->bindValue(1, $id, SQLITE3_INTEGER);
+    $q->bindValue(1, $userid, SQLITE3_INTEGER);
     $ret = $q->execute();
     $db->close();
 

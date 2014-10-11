@@ -7,6 +7,8 @@ $apiport = '8081';      # The port of the PowerDNS API
 $apisid  = 'localhost'; # PowerDNS's :server_id
 $allowzoneadd = FALSE;  # Allow normal users to add zones
 
+$logourl = null;
+# $logourl = 'https://www.tuxis.nl/uploads/images/nsedit.png'
 
 # If you configure this, nsedit will try to authenticate via WeFact too.
 # Debtors will be added to the sqlitedatabase with their crypted password.
